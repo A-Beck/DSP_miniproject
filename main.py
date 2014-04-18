@@ -8,7 +8,6 @@ import getopt
 import os
 
 
-
 COLORS = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
 # blue, green, red, cyan, magenta, yellow, black, white
 MARKERS = ['o', 'v', '^', '<', '>', 's', 'p', '*', 'D', ]
@@ -94,15 +93,17 @@ def main():
     centroids = 5
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hc", ["file=", "iter=", "filt=", "centriods="])
+        opts, args = getopt.getopt(sys.argv[1:], "hc", ["file=", "iter=", "filt=", "centroids="])
     except getopt.GetoptError:
-        print 'main.py --file=<shp file> --iter=<num iterations> --filt=<filter type>, --centriods=<number of centriods>'
+        print 'main.py --file=<shp file> --iter=<num iterations> --filt=<filter type>, ' \
+              '\n--centriods=<num centriods>'
         sys.exit()
 
     for opt, arg in opts:
 
         if opt == '-h':
-            print 'main.py --file=<shp file> --iter=<num iterations> --filt=<filter type>, --centriods=<number of centriods>'
+            print 'main.py --file=<shp file> --iter=<num iterations>\n ' \
+                  '--filt=<filter type>, --centriods=<num centriods>'
             print 'filter options: \n\txy to remove xy coordinates\n\tva to remove velocity and acceleration'
             print 'file info: file entered must be a shapefile (.shp)'
             print 'iter info: number of iterations for kmeans. Must be an integer'
@@ -135,9 +136,9 @@ def main():
             else:
                 print 'Error: Unsupported filter!'
 
-        elif opt == "--centriods":
+        elif opt == "--centroids":
             try:
-                centriods = int(arg)
+                centroids = int(arg)
             except ValueError:
                 print 'ERROR: Number of centroids must be a positive integer'
                 sys.exit()
