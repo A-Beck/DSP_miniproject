@@ -12,7 +12,7 @@ Miniproject for ECE 4750 (dsp) at the University of Virginia
   
 <b>Module Descriptions:</b>
 
-  <em>Rect.py<em>
+  <em>Rect.py</em>
     Simple classes to modle a rectangular area of interest and an InSAR point
 
   <em>segment.py</em>
