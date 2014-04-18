@@ -6,7 +6,7 @@ Miniproject for ECE 4750 (dsp) at the University of Virginia
 
 <b>Language Used:</b> Python 2.7
 
-<b>Packages Used:<b>
+<b>Packages Used:</b>
   matplotlib - used for graphing
   scipy - provide algorithmic support
   
