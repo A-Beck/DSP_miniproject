@@ -10,7 +10,8 @@ Miniproject for ECE 4750 (dsp) at the University of Virginia
   matplotlib - used for graphing
   scipy - provide algorithmic support
   
-<b>Module Descriptions:<b/>
+<b>Module Descriptions:</b>
+
   <em>Rect.py<em>
     Simple classes to modle a rectangular area of interest and an InSAR point
 
