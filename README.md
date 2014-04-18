@@ -13,7 +13,7 @@ Miniproject for ECE 4750 (dsp) at the University of Virginia
 <b>Module Descriptions:</b>
 
   <em>Rect.py</em>
-    Simple classes to modle a rectangular area of interest and an InSAR point
+    Simple classes to model a rectangular area of interest and an InSAR point
 
   <em>segment.py</em>
     Uses EPSG:2284 coordinate system to select which InSAR points to use
