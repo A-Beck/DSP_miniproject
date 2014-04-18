@@ -9,6 +9,8 @@ Miniproject for ECE 4750 (dsp) at the University of Virginia
 <b>Packages Used:</b>
 <p>
   matplotlib - used for graphing
+</p>
+<p>
   scipy - provide algorithmic support
 </p>  
 <b>Module Descriptions:</b>
