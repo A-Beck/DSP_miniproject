@@ -1,3 +1,6 @@
+from __future__ import division
+
+
 class Rect():
     """ A class that models a rectangular area of interest """
 
@@ -41,3 +44,27 @@ class Point():
 
     def assign_to_cluster(self, group_id):
         self.group_id = group_id
+
+
+class Cluster:
+    """ A Class that represents a cluster """
+
+    def __init__(self, id):
+        self.group_id = id
+        self.x_vals = []
+        self.y_vals = []
+        self.v_vals = []
+        self.a_vals = []
+
+    def get_avgs(self):
+        x_avg = sum(self.x_vals)/len(self.x_vals)
+        y_avg = sum(self.y_vals)/len(self.y_vals)
+        v_avg = sum(self.v_vals)/len(self.v_vals)
+        a_avg = sum(self.a_vals)/len(self.a_vals)
+        return x_avg, y_avg, v_avg, a_avg
+
+    def add_pt(self, pt_list):
+        self.x_vals.append(pt_list[0])
+        self.y_vals.append(pt_list[1])
+        self.v_vals.append(pt_list[2])
+        self.a_vals.append(pt_list[3])
