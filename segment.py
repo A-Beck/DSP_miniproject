@@ -1,5 +1,5 @@
 import shapefile
-from Rect import Rect, Point
+from Struct import Rect
 
 
 def prompt_for_coordinates():
