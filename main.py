@@ -47,6 +47,12 @@ def run_kmeans(matrix, num_centroids=5, iterations=10):
     return code
 
 
+def run_fclusterdata(matrix, thresh, metric, method):
+    w_matrix = whiten(matrix)  # normalize data
+    code = fclusterdata(w_matrix, thresh, metric=metric, method=method)
+    return code
+
+
 def plot_data(point_dict, code):
     """
      Plots the data aquired by the Kmeans algorithm and insar pts
@@ -116,7 +122,7 @@ def main():
     iterations = 10
     filter = []
     centroids = 5
-    algo = 'k-means'
+    algo = 'kmeans'
     thresh = 1.153
     metric = 'euclidean'
     method = 'single'
@@ -199,10 +205,11 @@ def main():
     # run Kmeans algorithm
     pt_dict = segment.select_insar_points(filename, rect, filter=['time_series', 'area'])
     data = make_matrix(pt_dict, filter=filter)
+    code = None
     if algo == "kmeans":
         code = run_kmeans(data, iterations=iterations, num_centroids=centroids)
     elif algo == "hier":
-        code = fclusterdata(data, thresh, metric=metric, method=method)
+        code = run_fclusterdata(data, thresh, metric, method)
     thread.start_new_thread(generate_stats, (pt_dict, code, ))  # spin up a thread to generate statistics
     plot_data(pt_dict, code)
 
