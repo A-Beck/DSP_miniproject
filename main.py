@@ -1,13 +1,14 @@
 from Struct import Rect, Cluster
 import segment
 from scipy.cluster.vq import kmeans, vq, whiten
+from scipy.cluster.hierarchy import fclusterdata
 import matplotlib.pyplot as plt
 import copy
 import sys
 import getopt
 import os
 import thread
-
+from sets import Set
 
 COLORS = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
 # blue, green, red, cyan, magenta, yellow, black
@@ -115,15 +116,17 @@ def main():
     iterations = 10
     filter = []
     centroids = 5
-    method = 'k-means'
+    algo = 'k-means'
+    thresh = 1.153
+    metric = 'euclidean'
+    method = 'single'
 
-    options = ["file=", "iter=", "filt=", "centroids="]
+    options = ["file=", "iter=", "filt=", "centroids=", "algo=", "thresh=", "metric=", "method="]
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hc", options)
     except getopt.GetoptError:
-        print 'main.py --file=<shp file> --iter=<num iterations> --filt=<filter type>, ' \
-              '\n--centriods=<num centriods>'
+        print 'ERROR in Arguments : Run \'python main.py -h\' for help =)'
         sys.exit()
 
     for opt, arg in opts:
@@ -135,6 +138,10 @@ def main():
             print 'file info: file entered must be a shapefile (.shp)'
             print 'iter info: number of iterations for kmeans. Must be an integer'
             print 'centroid info: number of centroids for kmeans. Must be an integer'
+            print 'Method info: Must be "kmeans"  or hier'
+            print 'thresh info: Must be a positive float. Used for hier method'
+            print 'dist info: Way to calculate distance. See http://docs.scipy.org/doc/scipy-0.13.0' \
+                  '/reference/generated/scipy.spatial.distance.pdist.html'
             print 'To change ROI, run with -c option. All coordinates in EPSG:2284 NAD83'
             sys.exit()
 
@@ -171,12 +178,34 @@ def main():
             except ValueError:
                 print 'ERROR: Number of centroids must be a positive integer'
 
+        elif opt == "--algo":
+            if arg == 'kmeans' or arg == 'hier':
+                algo = arg
+            else:
+                print 'Error: Unsupported method Entered'
+
+        elif opt == "--thresh":
+            try:
+                thresh = float(arg)
+            except ValueError:
+                print 'ERROR: threshold must be a positive float'
+
+        elif opt == "--metric":
+            metric = arg
+
+        elif opt == "--method":
+            method = arg
+
     # run Kmeans algorithm
     pt_dict = segment.select_insar_points(filename, rect, filter=['time_series', 'area'])
     data = make_matrix(pt_dict, filter=filter)
-    code = run_kmeans(data, iterations=iterations, num_centroids=centroids)
+    if algo == "kmeans":
+        code = run_kmeans(data, iterations=iterations, num_centroids=centroids)
+    elif algo == "hier":
+        code = fclusterdata(data, thresh, metric=metric, method=method)
     thread.start_new_thread(generate_stats, (pt_dict, code, ))  # spin up a thread to generate statistics
     plot_data(pt_dict, code)
+
 
 
 if __name__ == '__main__':
