@@ -23,3 +23,5 @@ Miniproject for ECE 4750 (dsp) at the University of Virginia
     
   <em>main.py</em>
     Runs algorithms and plots the resulting data, shows averages as well
+    
+<b> Link to Video Presentation: </b> <p> https://www.movenote.com/v/DPCdzSCW9JDnK </p> 
