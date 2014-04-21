@@ -138,22 +138,22 @@ def main():
     for opt, arg in opts:
 
         if opt == '-h':
-            print 'main.py --file=<shp file> --iter=<num iterations>\n ' \
+            print 'main.py --file=<shp file> --iter=<num iterations>' \
                   '--filt=<filter type>, --centriods=<num centriods> --algo=<type>' \
                   '--thresh=<val> --metric=<type> --method=<type>'
             print '--filt options: \n\txy to remove xy coordinates\n\tva to remove velocity and acceleration'
-            print '--file info: file entered must be a shapefile (.shp)'
-            print '--iter info: number of iterations for kmeans. Must be an integer'
-            print '--centroid info: number of centroids for kmeans. Must be an integer'
-            print '--algo info: Must be "kmeans"  or hier'
+            print '--file info: file entered must be a shapefile (.shp) containing points'
+            print '--iter info: number of iterations for kmeans. Must be an + integer'
+            print '--centroid info: number of centroids for kmeans. Must be an + integer'
+            print '--algo info: Must be "kmeans"  or "hier"(=Hierarchical Agglomerative Clustering)'
             print '--thresh info: Must be a positive float. Used for hier method'
-            print '--metirc info: Way to calculate distance. See http://docs.scipy.org/doc/scipy-0.13.0' \
+            print '--metirc info: Way to calculate distance. See:\n http://docs.scipy.org/doc/scipy-0.13.0' \
                   '/reference/generated/scipy.spatial.distance.pdist.html'
-            print '--method info: Method to run hier under. See' \
+            print '--method info: Method to run hier under. See:\n' \
                   'http://docs.scipy.org/doc/scipy-0.13.0/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage'        
             print 'To change ROI, run with -c option. All coordinates in EPSG:2284 NAD83'
-            print 'General Warnings: This was tested with only one the shapefile I was intereted in. Due to variations in' \
-                  'shapefile format, this program may not work with other files. Should be easy to alter to make it work, just need' \
+            print '\nGeneral Warnings:\nThis was tested with only one the shapefile I was intereted in. Due to variations in' \
+                  'shapefile format, this program may not work with other files. Should be easy to alter to make it work, just need ' \
                   'to alter indexes in the segment.py file and in main.py file. Happy Coding!'
             sys.exit()
 
